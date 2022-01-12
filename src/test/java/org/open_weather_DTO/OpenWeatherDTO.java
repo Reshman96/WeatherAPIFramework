@@ -1,7 +1,8 @@
 package org.open_weather_DTO;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class OpenWeatherDTO{
 
@@ -46,6 +47,9 @@ public class OpenWeatherDTO{
 
 	@JsonProperty("snow")
 	private Snow snow;
+
+	@JsonProperty("rain")
+	private Rain rain;
 
 	public int getVisibility(){
 		return visibility;
@@ -100,4 +104,8 @@ public class OpenWeatherDTO{
 	}
 
 	public Snow getSnow() {return snow;}
+
+	public Rain getRain() {
+		return rain;
+	}
 }
