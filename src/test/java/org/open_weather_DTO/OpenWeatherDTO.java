@@ -98,4 +98,6 @@ public class OpenWeatherDTO{
 	public Wind getWind(){
 		return wind;
 	}
+
+	public Snow getSnow() {return snow;}
 }
