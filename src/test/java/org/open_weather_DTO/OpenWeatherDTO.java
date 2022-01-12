@@ -44,6 +44,9 @@ public class OpenWeatherDTO{
 	@JsonProperty("wind")
 	private Wind wind;
 
+	@JsonProperty("snow")
+	private Snow snow;
+
 	public int getVisibility(){
 		return visibility;
 	}
