@@ -1,10 +1,14 @@
 package org.open_weather_DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.testing_framework.ConnectionManager;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 public class OpenWeatherDTO{
 
@@ -50,6 +54,7 @@ public class OpenWeatherDTO{
 	@JsonProperty("snow")
 	private Snow snow;
 
+	@JsonInclude(NON_NULL)
 	@JsonProperty("rain")
 	private Rain rain;
 
