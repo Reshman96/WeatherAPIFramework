@@ -17,17 +17,17 @@ public class ConnectionManager {
     private static String URL;
     private static String type;
 
-    public static String getConnectionWithID(String location){
+    public static String getConnection(String location){
         URL = BASEURL + "?q=" + location + "&appid=";
         return URL + APIKEY;
     }
 
-    public static String getConnectionWithCoordinates(String latitude, String longitude){
+    public static String getConnection(String latitude, String longitude){
         URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude + "&appid=";
         return URL + APIKEY;
     }
 
-    public static String getConnectionWithZIP(String zip){
+    public static String getConnection(int zip){
         URL = BASEURL + "?zip=" + zip + "&appid=";
         return URL + APIKEY;
     }

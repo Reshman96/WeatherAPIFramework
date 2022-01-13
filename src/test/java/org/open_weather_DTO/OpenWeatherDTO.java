@@ -64,6 +64,8 @@ public class OpenWeatherDTO{
 
 	private String URL = ConnectionManager.getURL();
 
+	private boolean[] fields;
+
 	public int getVisibility(){
 		return visibility;
 	}
@@ -132,5 +134,14 @@ public class OpenWeatherDTO{
 
 	public String getURL(){
 		return URL;
+	}
+
+	public boolean[] getFields(){
+		boolean[] fields = new boolean[4];
+		if(getClouds() != null) fields[0] = true;
+		if(getRain() != null) fields[1] = true;
+		if(getSnow() != null) fields[2] = true;
+		if(getWind() != null) fields[3] = true;
+		return fields;
 	}
 }
