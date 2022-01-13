@@ -22,13 +22,28 @@ public class ConnectionManager {
         return URL + APIKEY;
     }
 
-    public static String getConnection(String latitude, String longitude){
+    public static String getConnection(String location, String unit){
+        URL = BASEURL + "?q=" + location + "&units=" + unit + "&appid=";
+        return URL + APIKEY;
+    }
+
+    public static String getConnection(double latitude, double longitude){
         URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude + "&appid=";
+        return URL + APIKEY;
+    }
+
+    public static String getConnection(double latitude, double longitude, String unit){
+        URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude + "&units=" + unit + "&appid=";
         return URL + APIKEY;
     }
 
     public static String getConnection(int zip){
         URL = BASEURL + "?zip=" + zip + "&appid=";
+        return URL + APIKEY;
+    }
+
+    public static String getConnection(int zip, String unit){
+        URL = BASEURL + "?zip=" + zip + "&units=" + unit + "&appid=";
         return URL + APIKEY;
     }
 
