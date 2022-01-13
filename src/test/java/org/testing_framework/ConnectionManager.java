@@ -36,7 +36,7 @@ public class ConnectionManager {
     private static HttpResponse<String> getResponse(){
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASEURL + endPoint))
+                .uri(URI.create(BASEURL + "?q=london&appid=" + APIKEY))
                 .build();
         HttpResponse<String> response = null;
 
