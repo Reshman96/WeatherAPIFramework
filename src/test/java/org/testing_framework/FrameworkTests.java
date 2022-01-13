@@ -26,7 +26,7 @@ public class FrameworkTests {
     @DisplayName("testBase")
     void testRain() {
         if (openWeatherDTO.getRain() != null) {
-            System.out.println(openWeatherDTO.getRain().getJsonMember1h());
+            System.out.println(openWeatherDTO.getRain());
         } else {
             System.out.println("whooops");
         }
