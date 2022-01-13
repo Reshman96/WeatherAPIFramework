@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testing_framework.ConnectionManager.getStatusCode;
 
 public class FrameworkTests {
-    private OpenWeatherDTO openWeatherDTO;
+    OpenWeatherDTO openWeatherDTO;
 
     @BeforeEach
     void setup() {
