@@ -5,16 +5,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Coord{
 
 	@JsonProperty("lon")
-	private double lon;
+	private Double lon;
 
 	@JsonProperty("lat")
-	private double lat;
+	private Double lat;
 
-	public double getLon(){
+	public Double getLon(){
 		return lon;
 	}
 
-	public double getLat(){
+	public Double getLat(){
 		return lat;
 	}
+
+	public boolean lonWithinBounds(){return lon >= -180 && lon <= 180;}
+
+	public boolean latWithinBounds(){return lat >= -90 && lat <= 90;}
 }
