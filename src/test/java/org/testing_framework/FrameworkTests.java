@@ -6,15 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.open_weather_DTO.OpenWeatherDTO;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.testing_framework.ConnectionManager.getStatusCode;
 
 public class FrameworkTests {
     OpenWeatherDTO openWeatherDTO;
+    String location = "london";
 
     @BeforeEach
     void setup() {
-        openWeatherDTO = Injector.injectDTO(ConnectionManager.getConnection("london"));
+        openWeatherDTO = Injector.injectDTO(ConnectionManager.getConnection(location));
     }
 
     @Test
@@ -24,41 +23,12 @@ public class FrameworkTests {
     }
 
     @Test
-    @DisplayName("test")
-    void testWeather() {
-
-        System.out.println(openWeatherDTO.getWeather().get(0).getMain());
-    }
-
-    @Test
-    @DisplayName("tesBase")
-    void tesBase() {
-
-        System.out.println(openWeatherDTO.getBase());
-    }
-
-    @Test
-    @DisplayName("tesBase")
-    void testMase() {
-
-        System.out.println(openWeatherDTO.getMain().getHumidity());
-    }
-
-    @Test
-    @DisplayName("tesBase")
-    void testcloud() {
-
-        System.out.println(openWeatherDTO.getClouds().getAll());
-    }
-
-    @Test
-    @DisplayName("tesBase")
-    void testrain() {
-
-        if(openWeatherDTO.getRain() != null){
-        System.out.println(openWeatherDTO.getRain().getJsonMember1h());
-    } else {
+    @DisplayName("testBase")
+    void testRain() {
+        if (openWeatherDTO.getRain() != null) {
+            System.out.println(openWeatherDTO.getRain().getJsonMember1h());
+        } else {
             System.out.println("whooops");
-        }}
-
+        }
+    }
 }
