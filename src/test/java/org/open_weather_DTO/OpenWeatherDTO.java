@@ -5,22 +5,30 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.testing_framework.ConnectionManager;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class OpenWeatherDTO{
 
 	@JsonProperty("visibility")
-	private int visibility;
+	private Integer visibility;
 
 	@JsonProperty("timezone")
-	private int timezone;
+	private Integer timezone;
 
 	@JsonProperty("main")
 	private Main main;
 
+	@JsonInclude(NON_NULL)
 	@JsonProperty("clouds")
 	private Clouds clouds;
 
@@ -28,7 +36,7 @@ public class OpenWeatherDTO{
 	private Sys sys;
 
 	@JsonProperty("dt")
-	private int dt;
+	private Integer dt;
 
 	@JsonProperty("coord")
 	private Coord coord;
@@ -40,17 +48,19 @@ public class OpenWeatherDTO{
 	private String name;
 
 	@JsonProperty("cod")
-	private int cod;
+	private Integer cod;
 
 	@JsonProperty("id")
-	private int id;
+	private Integer id;
 
 	@JsonProperty("base")
 	private String base;
 
+	@JsonInclude(NON_NULL)
 	@JsonProperty("wind")
 	private Wind wind;
 
+	@JsonInclude(NON_NULL)
 	@JsonProperty("snow")
 	private Snow snow;
 
@@ -60,15 +70,15 @@ public class OpenWeatherDTO{
 
 	private Map<String, List<String>> headers = ConnectionManager.getHeadersMap();
 
-	private int statusCode = ConnectionManager.getStatusCode();
+	private Integer statusCode = ConnectionManager.getStatusCode();
 
 	private String URL = ConnectionManager.getURL();
 
-	public int getVisibility(){
+	public Integer getVisibility(){
 		return visibility;
 	}
 
-	public int getTimezone(){
+	public Integer getTimezone(){
 		return timezone;
 	}
 
@@ -84,7 +94,7 @@ public class OpenWeatherDTO{
 		return sys;
 	}
 
-	public int getDt(){
+	public Integer getDt(){
 		return dt;
 	}
 
@@ -100,11 +110,11 @@ public class OpenWeatherDTO{
 		return name;
 	}
 
-	public int getCod(){
+	public Integer getCod(){
 		return cod;
 	}
 
-	public int getId(){
+	public Integer getId(){
 		return id;
 	}
 
@@ -126,11 +136,39 @@ public class OpenWeatherDTO{
 		return headers;
 	}
 
-	public int getStatusCode(){
+	public Integer getStatusCode(){
 		return statusCode;
 	}
 
 	public String getURL(){
 		return URL;
 	}
+
+	public boolean baseIsStations(){return base.equals("stations");}
+
+	public boolean visibilityWithinBounds(){return visibility >= 0 && visibility <= 20000;}
+
+	public boolean dateTimeWithinBounds(){
+		String epochString = dt + "000";
+		long epochLong = Long.parseLong(epochString);
+		Date date = new Date(epochLong);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String formatted = format.format(date);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String test = LocalDate.now().format(formatter);
+
+		if(test.equals(formatted)){
+			return true;
+		} else {
+			return false;}
+	}
+
+	public boolean timeZoneWithinBounds(){return timezone >= -43200 && timezone <= 50400;}
+
+	public boolean idWithinBounds(){return id.toString().length() ==7;}
+
+	public boolean nameWithinBounds(){return name.length() > 0 && name.length() < 90;}
+
+	public boolean codWithinBounds(){return cod == ConnectionManager.getStatusCode();}
+
 }
