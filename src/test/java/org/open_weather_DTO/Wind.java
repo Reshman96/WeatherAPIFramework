@@ -5,16 +5,43 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Wind{
 
 	@JsonProperty("deg")
-	private int deg;
+	private Integer deg;
 
 	@JsonProperty("speed")
-	private double speed;
+	private Double speed;
 
-	public int getDeg(){
+	@JsonProperty("gust")
+	private Double gust;
+
+	public Integer getDeg(){
 		return deg;
 	}
 
-	public double getSpeed(){
+	public Double getSpeed(){
 		return speed;
+	}
+
+	public Double getGust(){
+		return gust;
+	}
+
+	public boolean windSpeedWithinBounds(String type) {
+		if (type.equalsIgnoreCase("imperial")) {
+			return (speed >= 0 && speed <= 231);
+		} else {
+			return (speed >= 0 && speed <= 105);
+		}
+	}
+
+	public boolean windDegWithinBounds() {
+		return (deg >= 0 && deg <= 360);
+	}
+
+	public boolean windGustWithinBounds(String type) {
+		if (type.equalsIgnoreCase("imperial")) {
+			return (gust >= 0 && gust <= 231);
+		} else {
+			return (gust >= 0 && gust <= 105);
+		}
 	}
 }

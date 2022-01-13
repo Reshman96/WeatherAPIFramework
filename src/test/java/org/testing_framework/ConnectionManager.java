@@ -17,16 +17,35 @@ public class ConnectionManager {
     private static String URL;
     private static String type;
 
-    public static String getConnectionWithID(String location){
-        return BASEURL + "?q=" + location + "&appid=" + APIKEY;
+
+    public static String getConnection(String location){
+        URL = BASEURL + "?q=" + location +  "&appid=";
+        return URL + APIKEY;
     }
 
-    public static String getConnectionWithCoordinates(String latitude, String longitude){
-        return BASEURL + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKEY;
+    public static String getConnection(String location, String unit){
+        URL = BASEURL + "?q=" + location + "&units=" + unit +  "&appid=";
+        return URL + APIKEY;
     }
 
-    public static String getConnectionWithZIP(String zip){
-        return BASEURL + "?zip=" + zip + "&appid=" + APIKEY;
+    public static String getConnection(double latitude, double longitude){
+        URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude  + "&appid=";
+        return URL + APIKEY;
+    }
+
+    public static String getConnection(double latitude, double longitude, String unit){
+        URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude  + "&units=" + unit + "&appid=";
+        return URL + APIKEY;
+    }
+
+    public static String getConnection(int zip){
+        URL = BASEURL + "?zip=" + zip + "&appid=";
+        return URL + APIKEY;
+    }
+
+    public static String getConnection(int zip, String unit){
+        URL = BASEURL + "?zip=" + zip + "&units=" + unit + "&appid=";
+        return URL + APIKEY;
     }
 
     public static int getStatusCode(){
@@ -36,7 +55,7 @@ public class ConnectionManager {
     private static HttpResponse<String> getResponse(){
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASEURL + "?q=london&appid=" + APIKEY))
+                .uri(URI.create(URL + APIKEY))
                 .build();
         HttpResponse<String> response = null;
 
@@ -48,10 +67,9 @@ public class ConnectionManager {
 
         return response;
     }
-
-    public Map<String, List<String>> getHeadersMap(){
+    public static Map<String, List<String>> getHeadersMap(){
         return getResponse().headers().map();
     }
 
-    public String getURL(){ return BASEURL + endPoint;}
+    public static String getURL(){ return URL;}
 }

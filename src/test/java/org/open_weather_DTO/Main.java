@@ -2,47 +2,74 @@ package org.open_weather_DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Locale;
+
 public class Main{
 
 	@JsonProperty("temp")
-	private double temp;
+	private Double temp;
 
 	@JsonProperty("temp_min")
-	private double tempMin;
+	private Double tempMin;
 
 	@JsonProperty("humidity")
-	private int humidity;
+	private Integer humidity;
 
 	@JsonProperty("pressure")
-	private int pressure;
+	private Integer pressure;
 
 	@JsonProperty("feels_like")
-	private double feelsLike;
+	private Double feelsLike;
 
 	@JsonProperty("temp_max")
-	private double tempMax;
+	private Double tempMax;
 
-	public double getTemp(){
+	public Double getTemp(){
 		return temp;
 	}
 
-	public double getTempMin(){
+	public Double getTempMin(){
 		return tempMin;
 	}
 
-	public int getHumidity(){
+	public Integer getHumidity(){
 		return humidity;
 	}
 
-	public int getPressure(){
+	public Integer getPressure(){
 		return pressure;
 	}
 
-	public double getFeelsLike(){
+	public Double getFeelsLike(){
 		return feelsLike;
 	}
 
-	public double getTempMax(){
+	public Double getTempMax(){
 		return tempMax;
 	}
+
+
+	private boolean tempBounds(String type){
+		if (type.equalsIgnoreCase("imperial")){
+			return temp >= -148 && temp <= 212;
+		} else if(type.equalsIgnoreCase("metric")) {
+			return temp >= -100 && temp <= 100;
+		} else if(type.equalsIgnoreCase("")){
+			return temp >= 173.15 && temp <= 373.15;
+		}
+		return false;
+	}
+
+	public boolean tempWithinBounds(String type){return tempBounds(type);}
+
+	public boolean feelsLikeWithinBounds(String type){return tempBounds(type);}
+
+	public boolean tempMaxLikeWithinBounds(String type){return tempBounds(type);}
+
+	public boolean tempMinLikeWithinBounds(String type){return tempBounds(type);}
+
+	public boolean humidityWithinBounds(){return humidity >= 0 && humidity <= 100;}
+
+	public boolean pressureWithinBounds(){return pressure >= 750 && pressure <= 1250;}
+
 }

@@ -8,14 +8,14 @@ public class Rain{
 	private Rain rain;
 
 	@JsonProperty("1h")
-	private Double jsonMember1h;
+	private Double rainInMM;
 
 	public Rain getRain(){
 		return rain;
 	}
 
-	public Double getJsonMember1h(){
-		return jsonMember1h;
+	public Double getRainInMM(){
+		return rainInMM;
 	}
 
 	@Override
@@ -23,7 +23,11 @@ public class Rain{
 		return 
 			"Rain{" + 
 			"rain = '" + rain + '\'' + 
-			",1h = '" + jsonMember1h + '\'' + 
+			",1h = '" + rainInMM + '\'' +
 			"}";
 		}
+
+	public boolean rainWithinBounds() {
+		return (rainInMM >= 0 && rainInMM <= 12000);
+	}
 }
