@@ -35,7 +35,7 @@ public class ConnectionManager {
     }
 
     private static String appendUnit(){
-        if (UNIT.isEmpty()) return null;
+        if (UNIT.isEmpty()) return "";
         else return "&units=" + UNIT;
     }
 
