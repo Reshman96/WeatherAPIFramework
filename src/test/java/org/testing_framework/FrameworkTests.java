@@ -14,7 +14,7 @@ public class FrameworkTests {
 
     @BeforeEach
     void setup() {
-        openWeatherDTO = Injector.injectDTO(ConnectionManager.getConnectionWithID("london"));
+        openWeatherDTO = Injector.injectDTO(ConnectionManager.getConnection("london"));
     }
 
     @Test
