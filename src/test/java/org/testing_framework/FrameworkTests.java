@@ -19,6 +19,6 @@ public class FrameworkTests {
     @Test
     @DisplayName("Status code is 200")
     void statusCodeIs200() {
-        assertEquals(200, getStatusCode());
+        assertEquals(200, openWeatherDTO.getStatusCode());
     }
 }

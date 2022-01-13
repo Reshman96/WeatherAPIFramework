@@ -18,15 +18,18 @@ public class ConnectionManager {
     private static String type;
 
     public static String getConnectionWithID(String location){
-        return BASEURL + "?q=" + location + "&appid=" + APIKEY;
+        URL = BASEURL + "?q=" + location + "&appid=";
+        return URL + APIKEY;
     }
 
     public static String getConnectionWithCoordinates(String latitude, String longitude){
-        return BASEURL + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKEY;
+        URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude + "&appid=";
+        return URL + APIKEY;
     }
 
     public static String getConnectionWithZIP(String zip){
-        return BASEURL + "?zip=" + zip + "&appid=" + APIKEY;
+        URL = BASEURL + "?zip=" + zip + "&appid=";
+        return URL + APIKEY;
     }
 
     public static int getStatusCode(){
@@ -36,7 +39,7 @@ public class ConnectionManager {
     private static HttpResponse<String> getResponse(){
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASEURL + "?q=london&appid=" + APIKEY))
+                .uri(URI.create(URL + APIKEY))
                 .build();
         HttpResponse<String> response = null;
 
@@ -48,10 +51,9 @@ public class ConnectionManager {
 
         return response;
     }
-
-    public Map<String, List<String>> getHeadersMap(){
+    public static Map<String, List<String>> getHeadersMap(){
         return getResponse().headers().map();
     }
 
-    public String getURL(){ return BASEURL + endPoint;}
+    public static String getURL(){ return URL;}
 }

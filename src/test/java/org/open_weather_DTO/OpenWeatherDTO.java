@@ -1,8 +1,10 @@
 package org.open_weather_DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.testing_framework.ConnectionManager;
 
 import java.util.List;
+import java.util.Map;
 
 public class OpenWeatherDTO{
 
@@ -50,6 +52,12 @@ public class OpenWeatherDTO{
 
 	@JsonProperty("rain")
 	private Rain rain;
+
+	private Map<String, List<String>> headers = ConnectionManager.getHeadersMap();
+
+	private int statusCode = ConnectionManager.getStatusCode();
+
+	private String URL = ConnectionManager.getURL();
 
 	public int getVisibility(){
 		return visibility;
@@ -107,5 +115,17 @@ public class OpenWeatherDTO{
 
 	public Rain getRain() {
 		return rain;
+	}
+
+	public Map<String, List<String>> getHeaders(){
+		return headers;
+	}
+
+	public int getStatusCode(){
+		return statusCode;
+	}
+
+	public String getURL(){
+		return URL;
 	}
 }
