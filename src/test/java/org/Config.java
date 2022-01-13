@@ -23,4 +23,8 @@ public class Config {
     public static String getBaseURL(){
         return config.getProperty("BASEURL");
     }
+
+    public static String getUnit(){
+        return config.getProperty("UNIT");
+    }
 }
