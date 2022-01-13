@@ -13,30 +13,39 @@ import java.util.Map;
 public class ConnectionManager {
     private static final String BASEURL = Config.getBaseURL();
     private static final String APIKEY = Config.getAPIKey();
-    private static final String UNIT = Config.getUnit();
     private static String endPoint;
     private static String URL;
     private static String type;
 
 
     public static String getConnection(String location){
-        URL = BASEURL + "?q=" + location + appendUnit() +  "&appid=";
+        URL = BASEURL + "?q=" + location +  "&appid=";
+        return URL + APIKEY;
+    }
+
+    public static String getConnection(String location, String unit){
+        URL = BASEURL + "?q=" + location + "&units=" + unit +  "&appid=";
         return URL + APIKEY;
     }
 
     public static String getConnection(double latitude, double longitude){
-        URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude + appendUnit() + "&appid=";
+        URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude  + "&appid=";
+        return URL + APIKEY;
+    }
+
+    public static String getConnection(double latitude, double longitude, String unit){
+        URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude  + "&units=" + unit + "&appid=";
         return URL + APIKEY;
     }
 
     public static String getConnection(int zip){
-        URL = BASEURL + "?zip=" + zip + appendUnit() +"&appid=";
+        URL = BASEURL + "?zip=" + zip + "&appid=";
         return URL + APIKEY;
     }
 
-    private static String appendUnit(){
-        if (UNIT.isEmpty()) return "";
-        else return "&units=" + UNIT;
+    public static String getConnection(int zip, String unit){
+        URL = BASEURL + "?zip=" + zip + "&units=" + unit + "&appid=";
+        return URL + APIKEY;
     }
 
     public static int getStatusCode(){
