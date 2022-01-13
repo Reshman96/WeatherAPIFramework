@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Clouds{
 
 	@JsonProperty("all")
-	private int all;
+	private Integer all;
 
-	public int getAll(){
+	public Integer getAll(){
 		return all;
 	}
+
+	public boolean cloudPercentageWithinBounds(){return all >= 0 && all <= 100;}
 }
