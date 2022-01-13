@@ -8,41 +8,49 @@ public class Sys{
 	private String country;
 
 	@JsonProperty("sunrise")
-	private int sunrise;
+	private Integer sunrise;
 
 	@JsonProperty("sunset")
-	private int sunset;
+	private Integer sunset;
 
 	@JsonProperty("id")
-	private int id;
+	private Integer id;
 
 	@JsonProperty("type")
-	private int type;
+	private Integer type;
 
 	@JsonProperty("message")
-	private double message;
+	private Double message;
 
 	public String getCountry(){
 		return country;
 	}
 
-	public int getSunrise(){
+	public Integer getSunrise(){
 		return sunrise;
 	}
 
-	public int getSunset(){
+	public Integer getSunset(){
 		return sunset;
 	}
 
-	public int getId(){
+	public Integer getId(){
 		return id;
 	}
 
-	public int getType(){
+	public Integer getType(){
 		return type;
 	}
 
-	public double getMessage(){
+	public Double getMessage(){
 		return message;
+	}
+
+	public boolean sysCountryIsTwoLetters() {
+		return (country.length() == 2);
+	}
+
+	public boolean sysSunriseSunsetDifferenceWithinADay() {
+		return ((sunset - sunrise) < 3600 && (sunset - sunrise) > -3600);
 	}
 }
