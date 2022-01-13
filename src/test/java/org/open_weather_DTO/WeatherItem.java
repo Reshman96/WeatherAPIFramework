@@ -37,11 +37,11 @@ public class WeatherItem{
 	}
 
 	public boolean weatherIconFollowsPattern() {
-		return (icon.contains("d") || icon.contains("n"));
+		return (icon.contains("d") && icon.length() == 3 || icon.contains("n") && icon.length() == 3);
 	}
 
 	public boolean weatherDescriptionLessThanForty() {
-		return (description.length() <= 40);
+		return (description.length() > 0 && description.length() <= 40);
 	}
 
 	public boolean weatherMainIsValid() {
