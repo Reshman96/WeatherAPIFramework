@@ -53,4 +53,5 @@ public class Sys{
 	public boolean sysSunriseSunsetDifferenceWithinADay() {
 		return ((sunset - sunrise) < 3600 && (sunset - sunrise) > -3600);
 	}
+
 }

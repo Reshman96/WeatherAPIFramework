@@ -8,14 +8,14 @@ public class Snow {
     private Snow snow;
 
     @JsonProperty("1h")
-    private Double jsonMember1h;
+    private Double snowInMM;
 
     public Snow getSnow() {
         return snow;
     }
 
-    public Double getJsonMember1h() {
-        return jsonMember1h;
+    public Double getSnowInMM() {
+        return snowInMM;
     }
 
     @Override
@@ -23,11 +23,11 @@ public class Snow {
         return
                 "Snow{" +
                         "snow = '" + snow + '\'' +
-                        ",1h = '" + jsonMember1h + '\'' +
+                        ",1h = '" + snowInMM + '\'' +
                         "}";
     }
 
 	public boolean snowWithinBounds() {
-		return (jsonMember1h >= 0 && jsonMember1h <= 30000);
+		return (snowInMM >= 0 && snowInMM <= 30000);
 	}
 }
