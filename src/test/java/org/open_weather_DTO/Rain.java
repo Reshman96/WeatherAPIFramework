@@ -26,4 +26,8 @@ public class Rain{
 			",1h = '" + jsonMember1h + '\'' + 
 			"}";
 		}
+
+	public boolean rainWithinBounds() {
+		return (jsonMember1h >= 0 && jsonMember1h <= 12000);
+	}
 }
