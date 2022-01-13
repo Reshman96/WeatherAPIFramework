@@ -1,8 +1,10 @@
 package org.testing_framework;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.open_weather_DTO.OpenWeatherDTO;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class Injector {
 
@@ -10,8 +12,8 @@ public class Injector {
         ObjectMapper mapper = new ObjectMapper();
         OpenWeatherDTO openWeatherDTO = new OpenWeatherDTO();
         try {
-            openWeatherDTO = mapper.readValue(URL, openWeatherDTO.getClass());
-        } catch (JsonProcessingException e) {
+            openWeatherDTO = mapper.readValue(new URL(URL), OpenWeatherDTO.class);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return openWeatherDTO;

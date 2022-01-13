@@ -18,6 +18,7 @@ public class ConnectionManager {
     private static String type;
 
     public static String getConnectionWithID(String location){
+        System.out.println(BASEURL + "?q=" + location + "&appid=" + APIKEY);
         return BASEURL + "?q=" + location + "&appid=" + APIKEY;
     }
 
