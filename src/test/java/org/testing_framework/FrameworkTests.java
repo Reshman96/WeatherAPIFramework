@@ -101,4 +101,26 @@ public class FrameworkTests {
         System.out.println(ConnectionManager.getType());
         assertTrue(dto.getMain().tempWithinBounds(unit));
     }
+
+
+    public static Stream<Arguments> getDTOSLocations(){
+        String location = "london";
+        double latitude = 48.8566;
+        double longitude = 2.3522;
+        int zip = 10022;
+        OpenWeatherDTO openWeatherDTOUnit = Injector.injectDTO(ConnectionManager.getConnection(location));
+        OpenWeatherDTO openWeatherDTOImperial = Injector.injectDTO(ConnectionManager.getConnection(latitude, longitude));
+        OpenWeatherDTO openWeatherDTOMetric = Injector.injectDTO(ConnectionManager.getConnection(zip));
+
+        return Stream.of(Arguments.arguments(openWeatherDTOUnit),
+                Arguments.arguments(openWeatherDTOImperial),
+                Arguments.arguments(openWeatherDTOMetric));
+    }
+
+    @ParameterizedTest
+    @MethodSource("getDTOSLocations")
+    @DisplayName("Test name")
+    void testName(OpenWeatherDTO dto) {
+        System.out.println(dto.getName());
+    }
 }
