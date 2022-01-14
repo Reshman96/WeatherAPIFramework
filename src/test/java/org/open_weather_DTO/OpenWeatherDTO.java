@@ -137,9 +137,9 @@ public class OpenWeatherDTO{
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String formatted = format.format(date);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String test = LocalDate.now().format(formatter);
+		String currentDate = LocalDate.now().format(formatter);
 
-		if(test.equals(formatted)){
+		if(currentDate.equals(formatted)){
 			return true;
 		} else {
 			return false;}

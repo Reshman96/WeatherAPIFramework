@@ -11,6 +11,8 @@ import org.open_weather_DTO.OpenWeatherDTO;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class FrameworkTests {
     OpenWeatherDTO openWeatherDTO;
     String location = "tartous";
@@ -67,9 +69,9 @@ public class FrameworkTests {
     public static Stream<Arguments> getDTOS(){
         String location = "london";
         String path = "src/test/resources/IncorrectJSONResponse.JSON";
-        OpenWeatherDTO openWeatherDTO = Injector.injectDTO(ConnectionManager.getConnection(location));
+        OpenWeatherDTO openWeatherDTOUnit = Injector.injectDTO(ConnectionManager.getConnection(location));
         OpenWeatherDTO badOpenWeatherDTO = Injector.injectFileDTO(path);
-        return Stream.of(Arguments.arguments(openWeatherDTO),
+        return Stream.of(Arguments.arguments(openWeatherDTOUnit),
                 Arguments.arguments(badOpenWeatherDTO));
     }
 
@@ -78,5 +80,25 @@ public class FrameworkTests {
     @DisplayName("testBase")
     void testRain(OpenWeatherDTO dto) {
         if(dto.getRain()!=null) System.out.println("test");
+    }
+
+    public static Stream<Arguments> getDTOSUnit(){
+        String location = "london";
+        OpenWeatherDTO openWeatherDTOUnit = Injector.injectDTO(ConnectionManager.getConnection(location));
+        OpenWeatherDTO openWeatherDTOImperial = Injector.injectDTO(ConnectionManager.getConnection(location, "imperial"));
+        OpenWeatherDTO openWeatherDTOMetric = Injector.injectDTO(ConnectionManager.getConnection(location, "metric"));
+
+        return Stream.of(Arguments.arguments(openWeatherDTOUnit,""),
+                Arguments.arguments(openWeatherDTOImperial,"imperial"),
+                Arguments.arguments(openWeatherDTOMetric,"metric"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("getDTOSUnit")
+    @DisplayName("Test name")
+    void testName(OpenWeatherDTO dto, String unit) {
+        System.out.println(dto.getMain().getTemp());
+        System.out.println(ConnectionManager.getType());
+        assertTrue(dto.getMain().tempWithinBounds(unit));
     }
 }
