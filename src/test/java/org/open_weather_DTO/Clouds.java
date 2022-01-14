@@ -7,7 +7,7 @@ public class Clouds{
 	@JsonProperty("all")
 	private Integer all;
 
-	public Integer getAll(){
+	public Integer getPercentage(){
 		return all;
 	}
 
