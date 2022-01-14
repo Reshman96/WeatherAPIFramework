@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.open_weather_DTO.OpenWeatherDTO;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class FakeJSONTests {
     private ObjectMapper mapper;
     OpenWeatherDTO openWeatherDTO;
