@@ -68,12 +68,6 @@ public class OpenWeatherDTO{
 	@JsonProperty("rain")
 	private Rain rain;
 
-	private Map<String, List<String>> headers = ConnectionManager.getHeadersMap();
-
-	private Integer statusCode = ConnectionManager.getStatusCode();
-
-	private String URL = ConnectionManager.getURL();
-
 	public Integer getVisibility(){
 		return visibility;
 	}
@@ -132,18 +126,6 @@ public class OpenWeatherDTO{
 		return rain;
 	}
 
-	public Map<String, List<String>> getHeaders(){
-		return headers;
-	}
-
-	public Integer getStatusCode(){
-		return statusCode;
-	}
-
-	public String getURL(){
-		return URL;
-	}
-
 	public boolean baseIsStations(){return base.equals("stations");}
 
 	public boolean visibilityWithinBounds(){return visibility >= 0 && visibility <= 20000;}
@@ -155,9 +137,9 @@ public class OpenWeatherDTO{
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String formatted = format.format(date);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String test = LocalDate.now().format(formatter);
+		String currentDate = LocalDate.now().format(formatter);
 
-		if(test.equals(formatted)){
+		if(currentDate.equals(formatted)){
 			return true;
 		} else {
 			return false;}

@@ -2,8 +2,6 @@ package org.open_weather_DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Locale;
-
 public class Main{
 
 	@JsonProperty("temp")
@@ -23,6 +21,12 @@ public class Main{
 
 	@JsonProperty("temp_max")
 	private Double tempMax;
+
+	@JsonProperty("sea_level")
+	private Integer sea_level;
+
+	@JsonProperty("grnd_level")
+	private Integer ground_level;
 
 	public Double getTemp(){
 		return temp;
@@ -68,8 +72,15 @@ public class Main{
 
 	public boolean tempMinLikeWithinBounds(String type){return tempBounds(type);}
 
+	public boolean seaLevelWithinBounds(){return pressureBounds(sea_level);}
+
+	public boolean groundLevelWithinBounds(){return pressureBounds(ground_level);}
+
 	public boolean humidityWithinBounds(){return humidity >= 0 && humidity <= 100;}
 
-	public boolean pressureWithinBounds(){return pressure >= 750 && pressure <= 1250;}
+	public boolean pressureWithinBounds(){return pressureBounds(pressure);}
 
+	private boolean pressureBounds(Integer methodName) {
+		return methodName >= 750 && methodName <= 1250;
+	}
 }
