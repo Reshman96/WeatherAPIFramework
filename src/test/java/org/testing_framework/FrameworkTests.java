@@ -1,9 +1,6 @@
 package org.testing_framework;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,57 +26,50 @@ public class FrameworkTests {
         Assertions.assertEquals(200, ConnectionManager.getStatusCode());
     }
 
-    @Test
-    @DisplayName("Rain in MM if raining")
-    void rainInMMIfRaining() {
-        if (openWeatherDTO.getRain() != null) {
-            Assertions.assertTrue(openWeatherDTO.getRain().rainWithinBounds());
-            System.out.println("Current rainfall in mm is: " + openWeatherDTO.getRain().getRainInMM());
-        } else {
-            System.out.println("Is not raining");
+    @Nested
+    @DisplayName("Valid Input Checks")
+    static class validityChecks{
+        public static Stream<Arguments> getDTOS(){
+            String location = "london";
+            String path = "src/test/resources/IncorrectJSONResponse.JSON";
+            OpenWeatherDTO openWeatherDTOUnit = Injector.injectDTO(ConnectionManager.getConnection(location));
+            OpenWeatherDTO badOpenWeatherDTO = Injector.injectFileDTO(path);
+            return Stream.of(Arguments.arguments(openWeatherDTOUnit),
+                    Arguments.arguments(badOpenWeatherDTO));
         }
-    }
 
-    @Test
-    @DisplayName("Valid cloud percentage if cloudy")
-    void validCloudPercentageIfCloudy() {
-        if (openWeatherDTO.getClouds() != null) {
-            Assertions.assertTrue(openWeatherDTO.getClouds().cloudPercentageWithinBounds());
-            System.out.println("Cloud in percentage is: " + openWeatherDTO.getClouds().getPercentage());
-        } else {
-            System.out.println("Is not cloudy");
+        @ParameterizedTest
+        @MethodSource("getDTOS")
+        @DisplayName("Rain in MM if raining")
+        void rainInMMIfRaining(OpenWeatherDTO dto) {
+            if (dto.getRain() != null) {
+                if (dto.getRain().rainWithinBounds()) Assertions.assertTrue(dto.getRain().rainWithinBounds());
+                else System.out.println("Rainfall amount is out of bounds");
+                System.out.println("Current rainfall in mm is: " + dto.getRain().getRainInMM());
+            } else {
+                System.out.println("Is not raining");
+            }
         }
-    }
 
-    @Test
-    @DisplayName("Sunrise and sunset are within a day")
-    void sunriseAndSunsetWithinADay() {
-        Assertions.assertTrue(openWeatherDTO.getSys().sysSunriseSunsetDifferenceWithinADay());
-    }
+        @ParameterizedTest
+        @MethodSource("getDTOS")
+        @DisplayName("Valid cloud percentage if cloudy")
+        void validCloudPercentageIfCloudy(OpenWeatherDTO dto) {
+            if (dto.getClouds() != null) {
+                if (dto.getClouds().cloudPercentageWithinBounds()) Assertions.assertTrue(dto.getClouds().cloudPercentageWithinBounds());
+                else System.out.println("Cloud percentage is out of bounds");
+                System.out.println("Cloud in percentage is: " + dto.getClouds().getPercentage());
+            } else {
+                System.out.println("Is not cloudy");
+            }
+        }
 
-    // add tempToBounds test method
-    // run with default, metric, imperial
-
-
-
-    // add weatherMainIsValid test
-
-
-
-    public static Stream<Arguments> getDTOS(){
-        String location = "london";
-        String path = "src/test/resources/IncorrectJSONResponse.JSON";
-        OpenWeatherDTO openWeatherDTOUnit = Injector.injectDTO(ConnectionManager.getConnection(location));
-        OpenWeatherDTO badOpenWeatherDTO = Injector.injectFileDTO(path);
-        return Stream.of(Arguments.arguments(openWeatherDTOUnit),
-                Arguments.arguments(badOpenWeatherDTO));
-    }
-
-    @ParameterizedTest
-    @MethodSource("getDTOS")
-    @DisplayName("testBase")
-    void testRain(OpenWeatherDTO dto) {
-        if(dto.getRain()!=null) System.out.println("test");
+        @ParameterizedTest
+        @MethodSource("getDTOS")
+        @DisplayName("Sunrise and sunset are within a day")
+        void sunriseAndSunsetWithinADay(OpenWeatherDTO dto) {
+            Assertions.assertTrue(dto.getSys().sysSunriseSunsetDifferenceWithinADay());
+        }
     }
 
     public static Stream<Arguments> getDTOSUnit(){
@@ -95,8 +85,8 @@ public class FrameworkTests {
 
     @ParameterizedTest
     @MethodSource("getDTOSUnit")
-    @DisplayName("Test name")
-    void testName(OpenWeatherDTO dto, String unit) {
+    @DisplayName("Creating DTOS with different units")
+    void creatingDTOSWithDifferentUnits(OpenWeatherDTO dto, String unit) {
         System.out.println(dto.getMain().getTemp());
         System.out.println(ConnectionManager.getType());
         assertTrue(dto.getMain().tempWithinBounds(unit));
@@ -119,8 +109,8 @@ public class FrameworkTests {
 
     @ParameterizedTest
     @MethodSource("getDTOSLocations")
-    @DisplayName("Test name")
-    void testName(OpenWeatherDTO dto) {
+    @DisplayName("Creating DTOS with different location input types")
+    void creatingDTOSWithDifferentLocationTypes(OpenWeatherDTO dto) {
         System.out.println(dto.getName());
     }
 }
