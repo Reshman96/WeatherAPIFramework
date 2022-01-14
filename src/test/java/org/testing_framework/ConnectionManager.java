@@ -19,31 +19,37 @@ public class ConnectionManager {
 
 
     public static String getConnection(String location){
+        type = "";
         URL = BASEURL + "?q=" + location +  "&appid=";
         return URL + APIKEY;
     }
 
     public static String getConnection(String location, String unit){
+        type = unit;
         URL = BASEURL + "?q=" + location + "&units=" + unit +  "&appid=";
         return URL + APIKEY;
     }
 
     public static String getConnection(double latitude, double longitude){
+        type = "";
         URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude  + "&appid=";
         return URL + APIKEY;
     }
 
     public static String getConnection(double latitude, double longitude, String unit){
+        type = unit;
         URL = BASEURL + "?lat=" + latitude + "&lon=" + longitude  + "&units=" + unit + "&appid=";
         return URL + APIKEY;
     }
 
     public static String getConnection(int zip){
+        type = "";
         URL = BASEURL + "?zip=" + zip + "&appid=";
         return URL + APIKEY;
     }
 
     public static String getConnection(int zip, String unit){
+        type = unit;
         URL = BASEURL + "?zip=" + zip + "&units=" + unit + "&appid=";
         return URL + APIKEY;
     }
@@ -72,4 +78,6 @@ public class ConnectionManager {
     }
 
     public static String getURL(){ return URL;}
+
+    public static String getType(){ return type;}
 }
