@@ -52,7 +52,6 @@ public class Main{
 		return tempMax;
 	}
 
-
 	private boolean tempBounds(String type){
 		if (type.equalsIgnoreCase("imperial")){
 			return temp >= -148 && temp <= 212;
