@@ -88,7 +88,6 @@ public class FrameworkTests {
     @DisplayName("Creating DTOS with different units")
     void creatingDTOSWithDifferentUnits(OpenWeatherDTO dto, String unit) {
         System.out.println(dto.getMain().getTemp());
-        System.out.println(ConnectionManager.getType());
         assertTrue(dto.getMain().tempWithinBounds(unit));
     }
 

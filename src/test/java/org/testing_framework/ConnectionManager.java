@@ -13,7 +13,6 @@ import java.util.Map;
 public class ConnectionManager {
     private static final String BASEURL = Config.getBaseURL();
     private static final String APIKEY = Config.getAPIKey();
-    private static String endPoint;
     private static String URL;
     private static String type;
 
