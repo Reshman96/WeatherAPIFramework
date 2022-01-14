@@ -68,12 +68,6 @@ public class OpenWeatherDTO{
 	@JsonProperty("rain")
 	private Rain rain;
 
-	private Map<String, List<String>> headers = ConnectionManager.getHeadersMap();
-
-	private Integer statusCode = ConnectionManager.getStatusCode();
-
-	private String URL = ConnectionManager.getURL();
-
 	public Integer getVisibility(){
 		return visibility;
 	}
@@ -130,18 +124,6 @@ public class OpenWeatherDTO{
 
 	public Rain getRain() {
 		return rain;
-	}
-
-	public Map<String, List<String>> getHeaders(){
-		return headers;
-	}
-
-	public Integer getStatusCode(){
-		return statusCode;
-	}
-
-	public String getURL(){
-		return URL;
 	}
 
 	public boolean baseIsStations(){return base.equals("stations");}
